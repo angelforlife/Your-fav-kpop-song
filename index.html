@@ -3,155 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acompanhamento Menstrual</title>
+    <title>Questionário K-pop</title>
     <style>
         body {
+            background-color: #E6E6FA; /* Cor lilás */
             font-family: Arial, sans-serif;
-            background-color: #ffe6f2;
-            margin: 20px;
+            margin: 0;
+            padding: 20px;
         }
 
-        .container {
-            max-width: 800px;
+        .header {
+            text-align: center;
+            padding: 30px;
+            background-color: #9370DB;
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .questionario {
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
             background-color: white;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
-        h1 {
-            color: #ff69b4;
-            text-align: center;
+        .bandeira {
+            font-size: 40px;
+            margin: 10px;
         }
 
-        .form-section {
-            margin-bottom: 30px;
-        }
-
-        input[type="date"] {
-            padding: 8px;
-            border: 2px solid #ff69b4;
-            border-radius: 5px;
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
             margin: 10px 0;
+            border: 1px solid #9370DB;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #9370DB;
+            margin-top: 30px;
         }
 
         button {
-            background-color: #ff69b4;
+            background-color: #9370DB;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
         }
 
         button:hover {
-            background-color: #ff1493;
-        }
-
-        .reminder {
-            background-color: #fff0f6;
-            padding: 15px;
-            border-left: 5px solid #ff69b4;
-            margin: 20px 0;
-        }
-
-        #historyList {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        #historyList li {
-            padding: 8px;
-            margin: 5px 0;
-            background-color: #fff5f9;
-            border-radius: 5px;
+            background-color: #7B68EE;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🌺 Acompanhamento Menstrual</h1>
-        
-        <div class="form-section">
-            <h2>Registrar Menstruação</h2>
-            <form onsubmit="savePeriodDate(event)">
-                <label>Data de início:</label><br>
-                <input type="date" id="periodDate" required><br>
-                <button type="submit">Salvar</button>
-            </form>
-        </div>
-
-        <div class="reminder">
-            <h2>📅 Próximos Alertas</h2>
-            <p id="pillReminder"></p>
-        </div>
-
-        <div class="history">
-            <h2>Histórico</h2>
-            <ul id="historyList"></ul>
-        </div>
+    <div class="header">
+        <div class="bandeira">🇰🇷🇰🇷🇰🇷</div>
+        <h1>Sua música favorita</h1>
+        <div class="bandeira">🇰🇷🇰🇷🇰🇷</div>
     </div>
 
-    <script>
-        // Carregar histórico ao iniciar
-        window.onload = function() {
-            loadHistory();
-            updateReminder();
-        };
+    <div class="questionario">
+        <h2>Questionário K-pop</h2>
+        
+        <form>
+            <label>Seu grupo/duo/solo preferido:</label>
+            <input type="text" placeholder="Ex: BTS, Blackpink, IU...">
 
-        function savePeriodDate(event) {
-            event.preventDefault();
-            const dateInput = document.getElementById('periodDate');
-            const selectedDate = new Date(dateInput.value);
-            
-            // Salvar no localStorage
-            const periodDate = {
-                date: selectedDate.toISOString(),
-                month: selectedDate.getMonth() + 1,
-                year: selectedDate.getFullYear()
-            };
-            
-            let history = JSON.parse(localStorage.getItem('periodHistory') || '[]');
-            history.push(periodDate);
-            localStorage.setItem('periodHistory', JSON.stringify(history));
-            
-            updateReminder();
-            loadHistory();
-            dateInput.value = '';
-        }
+            <label>Sua música favorita desse artista:</label>
+            <input type="text" placeholder="Nome da música">
 
-        function loadHistory() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = '';
-            
-            const history = JSON.parse(localStorage.getItem('periodHistory') || '[]');
-            
-            history.forEach(entry => {
-                const date = new Date(entry.date);
-                const li = document.createElement('li');
-                li.textContent = `📆 ${date.toLocaleDateString('pt-BR')}`;
-                historyList.appendChild(li);
-            });
-        }
+            <label>Seu bias:</label>
+            <input type="text" placeholder="Membro favorito do grupo">
 
-        function updateReminder() {
-            const reminderElement = document.getElementById('pillReminder');
-            const history = JSON.parse(localStorage.getItem('periodHistory') || '[]');
-            
-            if (history.length > 0) {
-                const lastPeriod = new Date(history[history.length - 1].date);
-                const pillStartDate = new Date(lastPeriod);
-                pillStartDate.setDate(lastPeriod.getDate() + 7); // 7 dias após a menstruação
-                
-                reminderElement.innerHTML = `
-                    ⏰ Próximo início de anticoncepcional:<br>
-                    <strong>${pillStartDate.toLocaleDateString('pt-BR')}</strong>
-                `;
-            } else {
-                reminderElement.textContent = "Nenhum registro encontrado. Adicione sua última menstruação para gerar alertas.";
-            }
-        }
-    </script>
+            <label>Seu utt supremo:</label>
+            <input type="text" placeholder="Ultimate bias de todos os tempos">
+
+            <button type="submit">Enviar Respostas</button>
+        </form>
+    </div>
 </body>
 </html>
